@@ -8,10 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <title>{{ config('app.name', 'Unreleased.io') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -19,7 +16,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Encode+Sans+Condensed:400,700">
 
     <!-- Styles -->
-    <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/app.css">
 
 </head>
 <body>
@@ -94,6 +91,6 @@
         @yield('content')
     </main>
 </div>
-<script src="{{ asset('assets/js/app.js') }}"></script>
+<script src="/assets/js/app.js"></script>
 </body>
 </html>
