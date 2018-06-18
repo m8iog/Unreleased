@@ -25,6 +25,13 @@ $nav-link-padding-y: 1rem;
     letter-spacing: 1px;
 }
 
+// Navbar Dropdown
+$dropdown-bg: $color-dark;
+$dropdown-link-color: $color-white;
+$dropdown-link-hover-bg: $color-dark;
+$dropdown-link-hover-color: $color-grey;
+
+// Theme colors
 $theme-colors: (
         'light-orange': $color-light-orange,
         'orange': $color-orange,
