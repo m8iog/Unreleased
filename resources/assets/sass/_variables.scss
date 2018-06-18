@@ -1,8 +1,52 @@
+// Colors
+$color-light-orange: #F96E05;
+$color-orange: #D4751B;
+$color-white: #FFFFFF;
+$color-black: #000000;
+$color-dark: #2a2d30;
+$color-darker: #191926;
+$color-grey: #8a8a90;
 
 // Body
-$body-bg: #f5f8fa;
+$body-bg: $color-darker;
+
+// Navbar
+$navbar-dark-color: $color-grey;
+$navbar-brand-font-size: 1rem;
+$navbar-dark-active-color: $color-light-orange;
+$nav-link-padding-x: 20px;
+$nav-link-padding-y: 1rem;
+.navbar {
+    border-top: 5px solid $color-light-orange;
+}
+
+.navbar-brand {
+    color: $color-white !important;
+    letter-spacing: 1px;
+}
+
+$theme-colors: (
+        'light-orange': $color-light-orange,
+        'orange': $color-orange,
+        'white': $color-white,
+        'black': $color-black,
+        'dark': $color-dark,
+        'darker': $color-darker,
+        'grey': $color-grey,
+);
 
 // Typography
-$font-family-sans-serif: "Raleway", sans-serif;
-$font-size-base: 0.9rem;
-$line-height-base: 1.6;
+$font-family-sans-serif: 'Encode Sans Condensed', sans-serif;
+$font-size-base: 1rem;
+$line-height-base: 1.5;
+
+// Input
+$input-border-color: $color-dark;
+$input-bg: $color-dark;
+
+// Buttons
+$btn-padding-x: 25px;
+$btn-border-radius: 100px;
+.btn .btn-gradient {
+    background: linear-gradient(271deg, #e54114, #e8620b 47%, #f49b05) !important;
+}
