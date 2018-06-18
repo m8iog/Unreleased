@@ -32,10 +32,6 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav mr-auto">
-
-                </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
@@ -87,9 +83,9 @@
         </div>
     </nav>
 
-    <main class="py-4">
+    <div class="py-4">
         @yield('content')
-    </main>
+    </div>
 </div>
 <script src="/assets/js/app.js"></script>
 </body>
