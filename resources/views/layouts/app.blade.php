@@ -42,12 +42,12 @@
                         </a>
                     </li>
                     <li class="nav-item mr-2">
-                        <a class="nav-link" href="{{ route('register') }}">
+                        <a class="nav-link" href="{{ route('artist.index') }}">
                             <i class="fas fa-fw fa-user"></i> {{ __('Artists') }}
                         </a>
                     </li>
                     <li class="nav-item mr-2">
-                        <a class="nav-link" href="{{ route('register') }}">
+                        <a class="nav-link" href="{{ route('genre.index') }}">
                             <i class="fas fa-fw fa-music"></i> {{ __('Genres') }}
                         </a>
                     </li>

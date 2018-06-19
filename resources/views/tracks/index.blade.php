@@ -6,9 +6,9 @@
             <div class="col-md-12">
                 <div class="card bg-dark text-white">
                     <div class="card-header">
-                        <div class="card-title">Recently added</div>
+                        Recently added tracks
                     </div>
-                    <table class="table ">
+                    <table class="table">
                         <thead>
                         <tr>
                             <th>#</th>
