@@ -1,8 +1,7 @@
-<nav class="navbar navbar-expand-md bg-black navbar-dark ">
+<nav class="navbar navbar-expand-md bg-dark navbar-dark ">
     <div class="container">
         <a class="navbar-brand font-weight-bold" href="{{ route("track.index") }}">
-            <i class="fas fa-fw fa-indent text-yellow"></i>
-            Un:<span class="text-yellow">Released</span>
+            Un:Released.io
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
             <span class="navbar-toggler-icon"></span>
@@ -18,6 +17,7 @@
                         <i class="fas fa-fw fa-plus"></i> {{ __('Add track') }}
                     </a>
                 </li>
+
                 <li class="nav-item mr-2">
                     <a class="nav-link" href="{{ route('artist.index') }}">
                         <i class="fas fa-fw fa-user"></i> {{ __('Artists') }}
@@ -29,7 +29,7 @@
                     </a>
                 </li>
                 @guest
-                    <li class="nav-item ml-4 border-left pl-4 border-darker">
+                    <li class="nav-item ml-4 border-left pl-4 border-white">
                         <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                     </li>
                     <li class="nav-item">
@@ -59,14 +59,3 @@
         </div>
     </div>
 </nav>
-
-<!-- Breadcrumbs -->
-<div class="bg-yellow text-darker font-weight-bold py-2">
-    <div class="container">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Library</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Data</li>
-        </ol>
-    </div>
-</div>

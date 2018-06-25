@@ -1,84 +1,37 @@
-// Colors
-$color-light-orange: #F96E05;
-$color-orange: #D4751B;
-$color-yellow: #FFED4A;
-$color-white: #FFFFFF;
-$color-black: #121212;
-$color-darker: #181818;
-$color-dark: #282828;
-$color-grey: #B3B3B3;
-$color-light: #F8FAFC;
-
-// Theme colors
-$theme-colors: (
-        'light-orange': $color-light-orange,
-        'orange': $color-orange,
-        'yellow': $color-yellow,
-        'white': $color-white,
-        'black': $color-black,
-        'dark': $color-dark,
-        'darker': $color-darker,
-        'grey': $color-grey,
-);
-
-// Radius
-$border-radius: 0;
-
 // Body
-$body-bg: $color-dark;
-
-// Navbar
-$navbar-dark-color: $color-grey;
-$navbar-brand-font-size: 1rem;
-$navbar-dark-active-color: $color-yellow;
-$nav-link-padding-x: 10px;
-$nav-link-padding-y: 0.6rem;
-
-.navbar-brand {
-    color: $color-white !important;
-    letter-spacing: 1px;
-}
-
-// Navbar Dropdown
-$dropdown-bg: $color-darker;
-$dropdown-link-color: $color-white;
-$dropdown-link-hover-bg: $color-darker;
-$dropdown-link-hover-color: $color-grey;
+$body-bg: #f5f8fa;
 
 // Typography
 $headings-font-family: 'Montserrat', sans-serif;
 $font-family-sans-serif: 'Source Sans Pro', sans-serif;
-$font-size-base: 0.8rem;
-$line-height-base: 1.5;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
 
-.navbar {
-    font-family: $headings-font-family;
-}
-
-// Input
-$input-border-color: $color-dark;
-$input-color: $color-light;
-$input-bg: $color-dark;
-
-// Table
-$table-border-color: lighten($color-darker, 0.9);
-
-// Buttons
-$btn-padding-x: 25px;
-$btn-border-radius: 100px;
-
-// Breadcrumbs
-$breadcrumb-bg: none;
-$breadcrumb-padding-x: 0;
-$breadcrumb-padding-y: 0;
-$breadcrumb-margin-bottom: 0;
-$breadcrumb-active-color: transparentize($color-dark, 0.5);
-$breadcrumb-divider-color: $color-dark;
-
-.breadcrumb-item a {
-    color: $color-dark;
+// Card
+$card-border-color: transparent;
+$card-border-width: 2px;
+.card,
+.card-header {
+    border: 0 !important;
 }
 
 .card {
-    box-shadow: 0 1px 1px rgba(0, 0, 0, .05) !important;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1) !important;
 }
+
+.card-body {
+    border-top: 0 !important;
+}
+
+// Table
+$table-border-color: #f5f8fa;
+$table-border-width: 2px;
+.table thead th {
+    background: #e8ebef;
+    border-top-width: 0 !important;
+    border-bottom-width: $card-border-width !important;
+}
+
+
+// List group
+$list-group-border-radius: 0;

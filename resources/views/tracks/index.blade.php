@@ -4,11 +4,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="card bg-darker text-white">
-                    <div class="card-header">
+                <div class="card">
+                    <div class="card-header bg-dark text-white">
                         Recently added tracks
                     </div>
-                    <table class="table table-striped table-hover">
+                    <table class="table table-hover">
                         <thead>
                         <tr>
                             <th>#</th>

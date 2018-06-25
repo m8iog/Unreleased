@@ -23,7 +23,6 @@
 <body>
 <div id="app">
     @include("partials.navbar")
-
     <div class="py-4">
         @yield('content')
     </div>

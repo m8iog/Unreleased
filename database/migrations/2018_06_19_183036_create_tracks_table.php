@@ -17,6 +17,8 @@ class CreateTracksTable extends Migration
             $table->increments('id');
             $table->integer("artist_id");
             $table->integer("genre_id");
+            $table->string("source_url");
+            $table->string("source_description");
             $table->timestamps();
         });
     }

@@ -15,7 +15,15 @@ Auth::routes();
 
 
 Route::get('/', 'TrackController@index')->name('track.index');
+
 Route::get('/tracks/create', 'TrackController@create')->name('track.create');
 
 Route::get('/genres', 'GenreController@index')->name('genre.index');
 Route::get('/artists', 'ArtistController@index')->name('artist.index');
+
+
+Route::group(["prefix" => "/api"], function () {
+
+    Route::get('/artists', 'Api\ArtistController@index')->name('api.artist.index');
+    Route::post('/artists', 'Api\ArtistController@store')->name('api.artist.store');
+});
