@@ -21,7 +21,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($tracks as $track)
+                        @forelse($tracks as $track)
                             <tr>
                                 <td>{{ $track->id }}</td>
                                 <td>{{ $track->artist->stage_name }}</td>
@@ -37,7 +37,11 @@
                                     <div class="badge badge-success">{{ $track->release_status }}</div>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="7">No tracks added yet</td>
+                            </tr>
+                        @endforelse
                         </tbody>
                     </table>
                 </div>
