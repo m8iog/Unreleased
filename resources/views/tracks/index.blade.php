@@ -14,7 +14,6 @@
                             <th>#</th>
                             <th>Artist</th>
                             <th>Title</th>
-                            <th>Edit</th>
                             <th>Genre</th>
                             <th>Added</th>
                             <th>Source</th>
@@ -22,17 +21,20 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach(range(1,10) as $track)
+                        @foreach($tracks as $track)
                             <tr>
-                                <td>{{ $loop->index }}</td>
-                                <td>HeadHunterz</td>
-                                <td>TBA</td>
-                                <td>Edit</td>
-                                <td>Hardstyle</td>
-                                <td>{{ now()->subDays(random_int(1,100))->diffForHumans() }}</td>
-                                <td><a href="#">Hard with style #42</a></td>
+                                <td>{{ $track->id }}</td>
+                                <td>{{ $track->artist->stage_name }}</td>
+                                <td>{{ $track->title }}</td>
+                                <td>{{ $track->genre->name }}</td>
+                                <td>{{ $track->created_at->diffForHumans() }}</td>
                                 <td>
-                                    <div class="badge badge-success">Unreleased</div>
+                                    <a href="{{ $track->source_url }}" rel="nofollow" target="_blank">
+                                        {{ $track->source_description }}
+                                    </a>
+                                </td>
+                                <td>
+                                    <div class="badge badge-success">{{ $track->release_status }}</div>
                                 </td>
                             </tr>
                         @endforeach

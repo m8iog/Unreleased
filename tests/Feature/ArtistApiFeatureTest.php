@@ -45,14 +45,25 @@ class ArtistApiFeatureTest extends TestCase
     public function can_create_artist_with_stage_name_from_api()
     {
 
-        $this->withoutExceptionHandling()->json("post", "/api/artists", [
+        $this->json("post", "/api/artists", [
             "stage_name" => "Headhunterz"
         ])
-
             ->assertStatus(201)
             ->assertJsonStructure([
                 "id",
                 "stage_name",
             ]);
+    }
+
+    /** @test */
+    public function stage_name_must_be_unique() // At least for now
+    {
+        factory(Artist::class)->create(["stage_name" => "Headhunterz"]);
+
+        $this->json("post", "/api/artists", [
+            "stage_name" => "Headhunterz"
+        ])
+            ->assertStatus(422)
+            ->assertJsonValidationErrors("stage_name");
     }
 }

@@ -12,5 +12,22 @@ class GenreSeeder extends Seeder
     public function run()
     {
 
+        $genres = [
+            "Hardstyle",
+            "Hardcore",
+            "Rawstyle",
+            "Euphoric Hardstyle",
+            "Dubstyle",
+            "Psystyle",
+            "Hard Trance",
+            "Dubstep",
+        ];
+
+        foreach ($genres as $genre) {
+            \App\Genre::create([
+                "name" => $genre
+            ]);
+        }
+
     }
 }

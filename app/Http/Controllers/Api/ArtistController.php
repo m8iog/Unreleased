@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Artist;
+use App\Events\ArtistCreated;
 use App\Http\Resources\ArtistResource;
 use App\Repositories\ArtistRepository;
 use Illuminate\Http\Request;
@@ -23,9 +24,17 @@ class ArtistController extends Controller
 
     public function store(Request $request)
     {
-        return new ArtistResource(Artist::create([
+
+        $this->validate($request, ["stage_name" => "unique:artists,stage_name"]);
+
+        $artist = Artist::create([
             "stage_name" => $request->input("stage_name")
-        ]));
+        ]);
+
+
+        event(new ArtistCreated($artist));
+
+        return new ArtistResource();
 
     }
 }

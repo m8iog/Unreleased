@@ -21,14 +21,16 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Title (if known, else use TBA)</label>
-                                            <input type="text" name="title" class="form-control" placeholder="Headhunterz">
+                                            <input type="text" name="title" class="form-control" placeholder="">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
-                                            <label>Genre</label>
-                                            <select name="genre" class="form-control">
-                                                <option value="1">Hardstyle</option>
+                                            <label>Primary Genre</label>
+                                            <select name="genre_id" class="form-control">
+                                                @foreach($genres as $genre)
+                                                    <option value="{{ $genre->id }}">{{ $genre->name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -56,6 +58,7 @@
                             </div>
 
                             <div class="form-group text-right">
+                                {{ csrf_field() }}
                                 <button type="submit" class="btn btn-yellow">Add track</button>
                             </div>
 

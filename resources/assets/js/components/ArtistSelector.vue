@@ -1,12 +1,23 @@
 <template>
     <div class="artist-selector">
 
-        <input type="text" ref="input" class="form-control" placeholder="Headhunterz, Kasparov etc" v-model="search">
+        <input type="hidden" name="artist_id" :value="selectedArtist.id" v-if="selectedArtist">
 
-        <div class="w-100 list-group-dropdown" ref="dropdown" v-if="isOpen">
+        <button type="button" ref="input" class="btn btn-block text-left" @click="toggleSearch">
+            {{ buttonText }}
+        </button>
+
+        <div class="w-100 list-group-dropdown shadow-sm" ref="dropdown" v-show="isOpen">
             <ul class="list-group">
+                <li class="list-group-item">
+                    <input type="text" class="form-control" placeholder="Search for artist..." v-model="search">
+                </li>
+                <li class="list-group-item text-center" v-show="loading">
+                    <i class="fas fa-fw fa-cog fa-spin"></i> Searching
+                </li>
+
                 <li class="list-group-item d-flex align-items-center justify-content-between pointer"
-                    @click="selectArtist" v-for="artist in artists" v-if="artists.length">
+                    @click="selectArtist(artist)" v-for="artist in artists" v-if="artists.length">
                     <strong>{{ artist.stage_name }}</strong>
                     <small>{{ artist.real_name }}</small>
                 </li>
@@ -26,23 +37,18 @@
 
     .list-group-dropdown {
         z-index: 100;
-        text-align: left;
     }
 </style>
 <script>
     export default {
         data() {
             return {
+                isOpen: false,
                 minLength: 3,
                 loading: false,
                 search: "",
                 selectedArtist: null,
-                artists: [
-                    {id: 1, stage_name: "Headhunterz", real_name: "Willem Rebergen"},
-                    {id: 2, stage_name: "Noisecontrollers", real_name: "Bas Oskam"},
-                    {id: 3, stage_name: "Killer Clown", real_name: "Bas Oskam"},
-                ],
-
+                artists: [],
             }
         },
         mounted() {
@@ -51,42 +57,63 @@
                 modifiers: {
                     offset: {
                         enabled: true,
-                        offset: '0,5'
+                        offset: '-200,10'
                     }
                 }
             });
         },
         methods: {
+            toggleSearch() {
+                this.isOpen = !this.isOpen;
+            },
+            openSearch() {
+                this.isOpen = true;
+            },
+            closeSearch() {
+                this.isOpen = false;
+            },
             selectArtist(artist) {
                 this.selectedArtist = artist;
-                this.search = null;
+                this.search = "";
+                this.closeSearch();
             },
             createNewArtist() {
                 this.loading = true;
                 axios
                     .post("/api/artists", {
-                        q: this.search
+                        stage_name: this.search
                     })
                     .then(response => {
-                        this.selectedArtist = response.data;
+                        this.selectArtist(response.data);
                         this.loading = false;
                     });
             },
-            searchForArtists() {
+            searchForArtists: _.debounce(function () {
                 this.loading = true;
                 axios
                     .get("/api/artists", {
-                        q: this.search
+                        params: {
+                            q: this.search
+                        }
                     })
                     .then(response => {
                         this.artists = response.data;
                         this.loading = false;
                     });
+            }, 250)
+        },
+        watch: {
+            search(newValue, oldValue) {
+                this.searchForArtists();
             }
         },
         computed: {
-            isOpen() {
-                return (this.search.length > this.minLength) && !this.selectedArtist;
+            buttonText() {
+                if (this.selectedArtist) {
+                    return this.selectedArtist.stage_name;
+                }
+
+                return "Select artist";
             }
         }
     }
