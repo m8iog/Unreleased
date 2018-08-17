@@ -14,4 +14,11 @@ class ArtistController extends Controller
             "artists" => Artist::all()
         ]);
     }
+
+    public function show($id){
+      $artist = Artist::findOrFail($id);
+      return view("artists.show", compact('artist'));
+    }
+
+
 }
