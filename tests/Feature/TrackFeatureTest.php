@@ -23,7 +23,7 @@ class TrackFeatureTest extends TestCase
 
 
     /** @test */
-    public function can_add_a_new_track_with_valid_data()
+    public function test_can_add_a_new_track_with_valid_data()
     {
         $user = factory(User::class)->create();
 
