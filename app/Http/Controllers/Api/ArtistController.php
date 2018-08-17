@@ -34,7 +34,7 @@ class ArtistController extends Controller
 
         event(new ArtistCreated($artist));
 
-        return new ArtistResource();
+        return new ArtistResource($artist);
 
     }
 }

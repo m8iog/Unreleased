@@ -53,6 +53,9 @@ class ArtistApiFeatureTest extends TestCase
                 "id",
                 "stage_name",
             ]);
+        $this->assertDatabaseHas('artists', [
+          'stage_name' => 'Headhunterz'
+        ]);
     }
 
     /** @test */
