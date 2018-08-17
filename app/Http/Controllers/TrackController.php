@@ -34,7 +34,13 @@ class TrackController extends Controller
             flash("You must be logged in to post new tracks");
             return redirect()->route("register");
         }
-
+        $this->validate(request(), [
+          'title' => 'required',
+          'artist_id' => 'required',
+          'genre_id' => 'required',
+          'source_url' => 'required | url',
+          'source_description' => 'required',
+        ]);
 
         Track::create([
             "artist_id" => $request->input("artist_id"),

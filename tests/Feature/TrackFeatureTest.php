@@ -51,4 +51,83 @@ class TrackFeatureTest extends TestCase
         $this->assertCount(1, Track::all());
 
     }
+
+    public function test_track_must_have_a_title()
+    {
+      $user = factory(User::class)->create();
+      $track = factory(Track::class)->make();
+      $this->actingAs($user)
+          ->post(route("track.store"), [
+          "artist_id" => $track->artist->id,
+          "genre_id" => $track->genre->id,
+          "source_url" => $track->source_url,
+          "source_description" => $track->source_description
+      ])->assertSessionHasErrors('title');
+    }
+
+    public function test_track_must_have_an_artist()
+    {
+      $user = factory(User::class)->create();
+      $track = factory(Track::class)->make();
+      $this->actingAs($user)
+          ->post(route("track.store"), [
+          "genre_id" => $track->genre->id,
+          "title" => $track->title,
+          "source_url" => $track->source_url,
+          "source_description" => $track->source_description
+      ])->assertSessionHasErrors('artist_id');
+    }
+
+    public function test_track_must_have_a_genre()
+    {
+      $user = factory(User::class)->create();
+      $track = factory(Track::class)->make();
+      $this->actingAs($user)
+          ->post(route("track.store"), [
+          "artist_id" => $track->artist->id,
+          "title" => $track->title,
+          "source_url" => $track->source_url,
+          "source_description" => $track->source_description
+      ])->assertSessionHasErrors('genre_id');
+    }
+
+    public function test_track_must_have_a_source_url()
+    {
+      $user = factory(User::class)->create();
+      $track = factory(Track::class)->make();
+      $this->actingAs($user)
+          ->post(route("track.store"), [
+          "artist_id" => $track->artist->id,
+          "genre_id" => $track->genre->id,
+          "title" => $track->title,
+          "source_description" => $track->source_description
+      ])->assertSessionHasErrors('source_url');
+    }
+
+    public function test_track_must_have_a_source_url_that_is_actually_a_url()
+    {
+      $user = factory(User::class)->create();
+      $track = factory(Track::class)->make();
+      $this->actingAs($user)
+          ->post(route("track.store"), [
+          "artist_id" => $track->artist->id,
+          "genre_id" => $track->genre->id,
+          "title" => $track->title,
+          "source_url" => "NOT_A_URL",
+          "source_description" => $track->source_description
+      ])->assertSessionHasErrors('source_url');
+    }
+
+    public function test_track_must_have_a_source_description()
+    {
+      $user = factory(User::class)->create();
+      $track = factory(Track::class)->make();
+      $this->actingAs($user)
+          ->post(route("track.store"), [
+          "artist_id" => $track->artist->id,
+          "genre_id" => $track->genre->id,
+          "title" => $track->title,
+          "source_url" => $track->source_url,
+      ])->assertSessionHasErrors('source_description');
+    }
 }
