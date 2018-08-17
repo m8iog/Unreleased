@@ -18,7 +18,13 @@ class TrackFeatureTest extends TestCase
     /** @test */
     public function can_list_tracks_on_the_homepage()
     {
+      $track = factory(Track::class)->create();
 
+      $response = $this->get(route("track.index"));
+      $response->assertStatus(200);
+      $response->assertSee($track->title);
+      $response->assertSee($track->artist->name);
+      $response->assertSee($track->genre->name);
     }
 
 
