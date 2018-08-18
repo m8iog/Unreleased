@@ -24,7 +24,7 @@ class TrackController extends Controller
         }
 
         return view("tracks.create", [
-            "genres" => Genre::all()
+            "genres" => Genre::pluck('name', 'id')
         ]);
     }
 
