@@ -12,10 +12,10 @@
             <div class="row">
 
               <div class="col-md-4">
-                <div class="form-group{{ $errors->has('artist') ? ' has-error' : '' }}">
-                  {!! Form::label('artist', 'Input label') !!}
+                <div class="form-group{{ $errors->has('artist_id') ? ' has-error' : '' }}">
+                  {!! Form::label('artist_id', 'Input label') !!}
                   <artist-selector></artist-selector>
-                  <small class="text-danger">{{ $errors->first('artist') }}</small>
+                  <small class="text-danger">{{ $errors->first('artist_id') }}</small>
                 </div>
               </div>
 
@@ -29,10 +29,10 @@
               </div>
 
               <div class="col-md-4">
-                <div class="form-group{{ $errors->has('genre') ? ' has-error' : '' }}">
-                  {!! Form::label('genre', 'Primary Genre') !!}
-                  {!! Form::select('genre',$genres, null, ['class' => 'form-control',  'required' => 'required']) !!}
-                  <small class="text-danger">{{ $errors->first('genre') }}</small>
+                <div class="form-group{{ $errors->has('genre_id') ? ' has-error' : '' }}">
+                  {!! Form::label('genre_id', 'Primary Genre') !!}
+                  {!! Form::select('genre_id',$genres, null, ['class' => 'form-control',  'required' => 'required']) !!}
+                  <small class="text-danger">{{ $errors->first('genre_id') }}</small>
                 </div>
               </div>
 
