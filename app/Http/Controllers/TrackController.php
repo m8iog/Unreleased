@@ -56,9 +56,9 @@ class TrackController extends Controller
     }
     public function edit($id)
     {
-      $track = Track::findOrFail($id);
-      $genre = Genre::findOrFail($track->genre_id);
-        return view("tracks.edit", compact('track', 'genre'));
+        return view("tracks.edit", [
+            "track" => Track::findOrFail($id),
+        ]);
     }
 
     public function update(Request $request, $id)

@@ -51,6 +51,7 @@
                 artists: [],
             }
         },
+          props: ['preselected_artist'],
         mounted() {
             new Popper(this.$refs.input, this.$refs.dropdown, {
                 placement: 'bottom',
@@ -61,6 +62,9 @@
                     }
                 }
             });
+            if(!(this.preselected_artist === undefined)) {
+              this.selectedArtist = JSON.parse(this.preselected_artist)
+            }
         },
         methods: {
             toggleSearch() {

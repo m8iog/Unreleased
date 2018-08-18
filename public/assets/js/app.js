@@ -47778,6 +47778,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             artists: []
         };
     },
+
+    props: ['preselected_artist'],
     mounted: function mounted() {
         new Popper(this.$refs.input, this.$refs.dropdown, {
             placement: 'bottom',
@@ -47788,6 +47790,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             }
         });
+        if (!(this.preselected_artist === undefined)) {
+            this.selectedArtist = JSON.parse(this.preselected_artist);
+        }
     },
 
     methods: {

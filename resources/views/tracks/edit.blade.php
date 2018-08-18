@@ -14,7 +14,7 @@
               <div class="col-md-4">
                 <div class="form-group{{ $errors->has('artist_id') ? ' has-error' : '' }}">
                   {!! Form::label('artist_id', 'Input label') !!}
-                  <artist-selector></artist-selector>
+                  <artist-selector preselected_artist="{{$track->artist}}"></artist-selector>
                   <small class="text-danger">{{ $errors->first('artist_id') }}</small>
                 </div>
               </div>
@@ -31,7 +31,7 @@
               <div class="col-md-4">
                 <div class="form-group{{ $errors->has('genre_id') ? ' has-error' : '' }}">
                   {!! Form::label('genre_id', 'Primary Genre') !!}
-                  <genre-selector preselected_genre="{{$genre}}"></genre-selector>
+                  <genre-selector preselected_genre="{{$track->genre}}"></genre-selector>
                     <small class="text-danger">{{ $errors->first('genre_id') }}</small>
                 </div>
               </div>
