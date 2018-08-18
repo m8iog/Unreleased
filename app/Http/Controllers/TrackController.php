@@ -49,6 +49,9 @@ class TrackController extends Controller
             "source_description" => $request->input("source_description"),
             "title" => $request->input("title"),
         ]);
+        $request->session()->flash('success', 'Your track has been added successfully.');
+
+        return redirect()->route("track.index");
 
     }
 

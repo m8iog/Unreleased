@@ -46,7 +46,9 @@ class TrackFeatureTest extends TestCase
                 "source_url" => "https://www.youtube.com/watch?v=gnXrcpUScTg",
                 "source_description" => "Teaser video",
             ])
-            ->assertStatus(200);
+            ->assertStatus(302)
+            ->assertRedirect('/')
+            ->assertSessionHas('success', 'Your track has been added successfully.');
 
         $this->assertCount(1, Track::all());
 
