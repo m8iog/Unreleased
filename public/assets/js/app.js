@@ -48143,6 +48143,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             genres: []
         };
     },
+
+    props: ['preselected_genre'],
     mounted: function mounted() {
         new Popper(this.$refs.input, this.$refs.dropdown, {
             placement: 'bottom',
@@ -48153,7 +48155,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             }
         });
+        if (!(this.preselected_genre === undefined)) {
+            this.selectedGenre = JSON.parse(this.preselected_genre);
+        }
     },
+
 
     methods: {
         toggleSearch: function toggleSearch() {

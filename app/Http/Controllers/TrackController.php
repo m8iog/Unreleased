@@ -54,6 +54,28 @@ class TrackController extends Controller
         return redirect()->route("track.index");
 
     }
+    public function edit($id)
+    {
+      $track = Track::findOrFail($id);
+      $genre = Genre::findOrFail($track->genre_id);
+        return view("tracks.edit", compact('track', 'genre'));
+    }
 
+    public function update(Request $request, $id)
+    {
+      $track = Track::findOrFail($id);
+
+      $track->artist_id = $request->input('artist_id');
+      $track->genre_id = $request->input('genre_id');
+      $track->source_url = $request->input('source_url');
+      $track->source_description = $request->input('source_description');
+      $track->title = $request->input('title');
+      $track->save();
+
+      session()->flash('success', 'The track has been updated successfully.');
+
+      return redirect()->back();
+
+    }
 
 }

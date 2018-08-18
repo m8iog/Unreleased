@@ -132,4 +132,49 @@ class TrackFeatureTest extends TestCase
           "source_url" => $track->source_url,
       ])->assertSessionHasErrors('source_description');
     }
+
+    public function test_can_edit_a_track()
+    {
+      $user = factory(User::class)->create();
+      $track = factory(Track::class)->create();
+      $track2 = factory(Track::class)->make();
+      $this->assertDatabaseHas('tracks', [
+        "artist_id" => $track->artist_id,
+        "genre_id" => $track->genre_id,
+        "title" => $track->title,
+        "source_url" => $track->source_url,
+        "source_description" => $track->source_description,
+      ]);
+
+
+      $this->withoutExceptionHandling()
+          ->actingAs($user)
+          ->post(route("track.update", $track->id), [
+              "artist_id" => $track2->artist_id,
+              "genre_id" => $track2->genre_id,
+              "title" => $track2->title,
+              "source_url" => $track2->source_url,
+              "source_description" => $track2->source_description,
+          ])
+          ->assertStatus(302)
+          ->assertRedirect('/')
+          ->assertSessionHas('success', 'The track has been updated successfully.');
+
+      $this->assertCount(1, Track::all());
+      $this->assertDatabaseHas('tracks', [
+        "artist_id" => $track2->artist_id,
+        "genre_id" => $track2->genre_id,
+        "title" => $track2->title,
+        "source_url" => $track2->source_url,
+        "source_description" => $track2->source_description,
+      ]);
+      $this->assertDatabaseMissing('tracks', [
+        "artist_id" => $track->artist_id,
+        "genre_id" => $track->genre_id,
+        "title" => $track->title,
+        "source_url" => $track->source_url,
+        "source_description" => $track->source_description,
+      ]);
+
+    }
 }

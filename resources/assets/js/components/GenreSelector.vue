@@ -50,6 +50,7 @@
                 genres: [],
             }
         },
+        props: ['preselected_genre'],
         mounted() {
             new Popper(this.$refs.input, this.$refs.dropdown, {
                 placement: 'bottom',
@@ -60,7 +61,11 @@
                     }
                 }
             });
+            if(!(this.preselected_genre === undefined)) {
+              this.selectedGenre = JSON.parse(this.preselected_genre)
+            }
         },
+
         methods: {
             toggleSearch() {
                 this.isOpen = !this.isOpen;
