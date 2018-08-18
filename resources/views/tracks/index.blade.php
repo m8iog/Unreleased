@@ -14,6 +14,7 @@
                             <th>#</th>
                             <th>Artist</th>
                             <th>Title</th>
+                            <th>Edit</th>
                             <th>Genre</th>
                             <th>Added</th>
                             <th>Source</th>
@@ -26,6 +27,7 @@
                                 <td>{{ $track->id }}</td>
                                 <td>{{ $track->artist->stage_name }}</td>
                                 <td>{{ $track->title }}</td>
+                                <td> <a href="{{route('track.edit', $track->id)}}">Edit</a> </td>
                                 <td>{{ $track->genre->name }}</td>
                                 <td>{{ $track->created_at->diffForHumans() }}</td>
                                 <td>

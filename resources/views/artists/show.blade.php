@@ -40,6 +40,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Title</th>
+                                <th>Edit</th>
                                 <th>Genre</th>
                                 <th>Added</th>
                                 <th>Source</th>
@@ -51,6 +52,7 @@
                                   <tr>
                                       <td>{{ $track->id }}</td>
                                       <td>{{ $track->title }}</td>
+                                      <td> <a href="{{route('track.edit', $track->id)}}">Edit</a> </td>
                                       <td>{{ $track->genre->name }}</td>
                                       <td>{{ $track->created_at->diffForHumans() }}</td>
                                       <td>
