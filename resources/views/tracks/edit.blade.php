@@ -8,7 +8,7 @@
           <div class="card-header bg-dark text-white">Add new track</div>
 
           <div class="card-body">
-            {!! Form::open(['method' => 'POST', 'action' => 'TrackController@store', 'class' => 'form-horizontal']) !!}
+            {!! Form::open(['method' => 'POST', 'action' => ['TrackController@update', $track->id], 'class' => 'form-horizontal']) !!}
             <div class="row">
 
               <div class="col-md-4">
@@ -59,7 +59,7 @@
 
 
             <div class="btn-group pull-right">
-              {!! Form::submit("Add track", ['class' => 'btn btn-success']) !!}
+              {!! Form::submit("Update track", ['class' => 'btn btn-success']) !!}
             </div>
             {!! Form::close() !!}
 

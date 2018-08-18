@@ -18,8 +18,10 @@ Route::get('/', 'TrackController@index')->name('track.index');
 
 Route::get('/tracks/create', 'TrackController@create')->name('track.create');
 Route::post('/tracks/create', 'TrackController@store')->name('track.store');
-Route::get('/tracks/{id}/edit', 'TrackController@edit')->name('track.edit');
+
 Route::post('/tracks/{id}/update', 'TrackController@update')->name('track.update');
+
+Route::get('/tracks/{id}/edit', 'TrackController@edit')->name('track.edit');
 
 Route::get('/genres', 'GenreController@index')->name('genre.index');
 

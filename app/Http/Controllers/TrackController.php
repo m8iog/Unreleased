@@ -74,7 +74,7 @@ class TrackController extends Controller
 
       session()->flash('success', 'The track has been updated successfully.');
 
-      return redirect()->back();
+      return redirect()->route('track.index');
 
     }
 
