@@ -19,10 +19,8 @@ Vue.component('v-select', vSelect);
  */
 
 Vue.component('artist-selector', require('./components/ArtistSelector'));
+Vue.component('genre-selector', require('./components/GenreSelector'));
 
 const app = new Vue({
     el: '#app'
 });
-
-
-

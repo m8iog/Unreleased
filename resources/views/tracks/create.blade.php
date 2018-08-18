@@ -31,8 +31,8 @@
               <div class="col-md-4">
                 <div class="form-group{{ $errors->has('genre_id') ? ' has-error' : '' }}">
                   {!! Form::label('genre_id', 'Primary Genre') !!}
-                  {!! Form::select('genre_id',$genres, null, ['class' => 'form-control',  'required' => 'required']) !!}
-                  <small class="text-danger">{{ $errors->first('genre_id') }}</small>
+                  <genre-selector></genre-selector>
+                    <small class="text-danger">{{ $errors->first('genre_id') }}</small>
                 </div>
               </div>
 
