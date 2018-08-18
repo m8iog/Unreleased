@@ -11,7 +11,7 @@ class TrackController extends Controller
     public function index()
     {
         return view("tracks.index", [
-            "tracks" => Track::all()
+            "tracks" => Track::orderBy('created_at', 'desc')->take(10)->get()
         ]);
     }
 
