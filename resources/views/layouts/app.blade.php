@@ -24,6 +24,7 @@
 <div id="app">
     @include("partials.navbar")
     <div class="py-4">
+        @yield('partials.flash-messages')
         @yield('content')
     </div>
 </div>

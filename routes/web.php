@@ -23,7 +23,11 @@ Route::get('/genres', 'GenreController@index')->name('genre.index');
 
 
 Route::get('/artists', 'ArtistController@index')->name('artist.index');
+Route::get('/artists/create', 'ArtistController@create')->name('artist.create');
+
 Route::get('/artists/{id}', 'ArtistController@show')->name('artist.show');
+
+Route::post('/artists/create', 'ArtistController@store')->name('artist.store');
 
 
 Route::group(["prefix" => "/api"], function () {
