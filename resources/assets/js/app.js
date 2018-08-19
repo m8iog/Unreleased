@@ -21,6 +21,7 @@ Vue.component('v-select', vSelect);
 Vue.component('artist-selector', require('./components/ArtistSelector'));
 Vue.component('genre-selector', require('./components/GenreSelector'));
 Vue.component('search-field', require('./components/SearchField'));
+Vue.component('artist-index', require('./components/ArtistIndex'));
 
 const app = new Vue({
     el: '#app'

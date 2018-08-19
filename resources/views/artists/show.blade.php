@@ -65,6 +65,8 @@
                                       </td>
                                   </tr>
                         @endforeach
+                      </tbody>
+                    </table>
                       @else
                         There are no tracks assigned to this artist - yet!
                       @endif
