@@ -17,10 +17,10 @@
     <div class="card-body" v-for="artist in filteredArtists" >
 
       <div class="media" @click="clickedArtist(artist)">
-          <img src="http://via.placeholder.com/80x80" alt="Generic placeholder image" class="mr-3">
-          <div class="media-body">
+        <img src="http://via.placeholder.com/80x80" alt="Generic placeholder image" class="mr-3">
+        <div class="media-body">
 
-              <h5 class="mt-0">{{ artist.stage_name}}</h5>
+          <h5 class="mt-0">{{ artist.stage_name}}</h5>
           <strong>Bio:</strong> {{ artist.bio }}
         </div>
       </div>
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
@@ -37,27 +38,27 @@ export default {
       search: "",
     }
   },
-  props: ['default_artists'],
   mounted() {
-      this.artists = JSON.parse(this.default_artists)
+    axios.get("/api/artists")
+        .then(response => (this.artists = response.data))
+  },
+  methods: {
+    clickedArtist(artist) {
+      window.location.href = '/artists/' + artist.id;
     },
-    methods: {
-      clickedArtist(artist) {
-        window.location.href = '/artists/' + artist.id;
-      },
-      createArtist() {
-        window.location.href = '/artists/create';
-      },
+    createArtist() {
+      window.location.href = '/artists/create';
     },
-    computed: {
-      filteredArtists: function() {
-        return this.artists.filter((artist)=> {
-          return artist.stage_name.match(this.search);
-        });
-      }
+  },
+  computed: {
+    filteredArtists: function() {
+      return this.artists.filter((artist)=> {
+        return artist.stage_name.match(this.search);
+      });
     }
   }
-  </script>
+}
+</script>
 
-  <style lang="css">
-  </style>
+<style lang="css">
+</style>

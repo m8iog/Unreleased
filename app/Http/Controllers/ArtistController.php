@@ -11,9 +11,7 @@ class ArtistController extends Controller
     public function index()
     {
 
-        return view("artists.index", [
-            "artists" => Artist::all()
-        ]);
+        return view("artists.index");
     }
 
     public function show($id){
