@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Genre;
-use App\Events\ArtistCreated;
 use App\Http\Resources\GenreResource;
 use App\Repositories\GenreRepository;
 use Illuminate\Http\Request;
