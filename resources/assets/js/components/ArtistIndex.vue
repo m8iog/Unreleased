@@ -1,0 +1,63 @@
+<template lang="html">
+  <div class="card">
+    <div class="card-header bg-dark text-white">
+      <div class="row">
+        <div class="col-md-4">
+          <h1>Artists</h1>
+        </div>
+        <div class="col-md-6">
+          <input type="text"  class="form-control"  v-model="search" placeholder="Filter artists on stage name"/>
+
+        </div>
+        <div class="col-md-2">
+          <a class="btn btn-info"@click="createArtist">Create artist</a>
+        </div>
+      </div>
+    </div>
+    <div class="card-body" v-for="artist in filteredArtists" >
+
+      <div class="media" @click="clickedArtist(artist)">
+          <img src="http://via.placeholder.com/80x80" alt="Generic placeholder image" class="mr-3">
+          <div class="media-body">
+
+              <h5 class="mt-0">{{ artist.stage_name}}</h5>
+          <strong>Bio:</strong> {{ artist.bio }}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      artists: [],
+      search: "",
+    }
+  },
+  props: ['default_artists'],
+  mounted() {
+      this.artists = JSON.parse(this.default_artists)
+    },
+    methods: {
+      clickedArtist(artist) {
+        window.location.href = '/artists/' + artist.id;
+      },
+      createArtist() {
+        window.location.href = '/artists/create';
+      },
+    },
+    computed: {
+      filteredArtists: function() {
+        return this.artists.filter((artist)=> {
+          return artist.stage_name.match(this.search);
+        });
+      }
+    }
+  }
+  </script>
+
+  <style lang="css">
+  </style>
