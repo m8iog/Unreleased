@@ -13,6 +13,10 @@
             <ul class="navbar-nav ml-auto">
 
                 <li class="nav-item mr-2">
+                  <search-field></search-field>
+
+                </li>
+                <li class="nav-item mr-2">
                     <a class="nav-link" href="{{ route('track.create') }}">
                         <i class="fas fa-fw fa-plus"></i> {{ __('Add track') }}
                     </a>

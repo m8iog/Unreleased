@@ -14331,6 +14331,7 @@ Vue.component('v-select', __WEBPACK_IMPORTED_MODULE_0_vue_select___default.a);
 
 Vue.component('artist-selector', __webpack_require__(43));
 Vue.component('genre-selector', __webpack_require__(49));
+Vue.component('search-field', __webpack_require__(58));
 
 var app = new Vue({
   el: '#app'
@@ -48371,6 +48372,387 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(59)
+}
+var normalizeComponent = __webpack_require__(13)
+/* script */
+var __vue_script__ = __webpack_require__(61)
+/* template */
+var __vue_template__ = __webpack_require__(62)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/SearchField.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-68789ecb", Component.options)
+  } else {
+    hotAPI.reload("data-v-68789ecb", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(60);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(12)("05304db6", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-68789ecb\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./SearchField.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-68789ecb\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./SearchField.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(11)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.genre-selector {\n    position: relative;\n}\n.list-group-dropdown {\n    z-index: 100;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 61 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            isOpen: false,
+            minLength: 3,
+            loading: false,
+            search: "",
+            resultGenre: null,
+            resultArtist: null,
+            genres: [],
+            artists: []
+        };
+    },
+    mounted: function mounted() {
+        new Popper(this.$refs.input, this.$refs.dropdown, {
+            placement: 'bottom',
+            modifiers: {
+                offset: {
+                    enabled: true,
+                    offset: '-200,10'
+                }
+            }
+        });
+    },
+
+
+    methods: {
+        toggleSearch: function toggleSearch() {
+            this.isOpen = !this.isOpen;
+        },
+        openSearch: function openSearch() {
+            this.isOpen = true;
+        },
+        closeSearch: function closeSearch() {
+            this.isOpen = false;
+        },
+        selectGenre: function selectGenre(genre) {
+            window.location.href = '/genres/' + genre.id;
+        },
+        selectArtist: function selectArtist(artist) {
+            window.location.href = '/artists/' + artist.id;
+        },
+
+        searchForArtists: _.debounce(function () {
+            var _this = this;
+
+            this.loading = true;
+            axios.get("/api/artists", {
+                params: {
+                    q: this.search
+                }
+            }).then(function (response) {
+                _this.artists = response.data;
+                _this.loading = false;
+                if (_this.search === "") {
+                    _this.artists = [];
+                }
+            });
+        }, 250),
+        searchForGenres: _.debounce(function () {
+            var _this2 = this;
+
+            this.loading = true;
+            axios.get("/api/genres", {
+                params: {
+                    q: this.search
+                }
+            }).then(function (response) {
+                _this2.genres = response.data;
+                _this2.loading = false;
+                if (_this2.search === "") {
+                    _this2.genres = [];
+                }
+            });
+        }, 250)
+    },
+    watch: {
+        search: function search(newValue, oldValue) {
+            this.searchForArtists();
+            this.searchForGenres();
+        }
+    }
+});
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "search-field" }, [
+    _c(
+      "button",
+      {
+        ref: "input",
+        staticClass: "btn btn-block text-left",
+        attrs: { type: "button" },
+        on: { click: _vm.toggleSearch }
+      },
+      [_vm._v("\n        Search\n    ")]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.isOpen,
+            expression: "isOpen"
+          }
+        ],
+        ref: "dropdown",
+        staticClass: " list-group-dropdown shadow-sm"
+      },
+      [
+        _c(
+          "ul",
+          { staticClass: "list-group" },
+          [
+            _c("li", { staticClass: "list-group-item" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.search,
+                    expression: "search"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  placeholder: "Search for genres or artists"
+                },
+                domProps: { value: _vm.search },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.search = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c(
+              "li",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.loading,
+                    expression: "loading"
+                  }
+                ],
+                staticClass: "list-group-item text-center"
+              },
+              [
+                _c("i", { staticClass: "fas fa-fw fa-cog fa-spin" }),
+                _vm._v(" Searching\n            ")
+              ]
+            ),
+            _vm._v(" "),
+            _vm.genres.length
+              ? _c("li", { staticClass: "list-group-item" }, [
+                  _c("small", [_vm._v("Genres")])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm._l(_vm.genres, function(genre) {
+              return _vm.genres.length
+                ? _c(
+                    "li",
+                    {
+                      staticClass:
+                        "list-group-item d-flex align-items-center justify-content-between pointer",
+                      on: {
+                        click: function($event) {
+                          _vm.selectGenre(genre)
+                        }
+                      }
+                    },
+                    [_c("strong", [_vm._v(_vm._s(genre.name))])]
+                  )
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm.artists.length
+              ? _c("li", { staticClass: "list-group-item" }, [
+                  _c("small", [_vm._v("Artists")])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm._l(_vm.artists, function(artist) {
+              return _vm.artists.length
+                ? _c(
+                    "li",
+                    {
+                      staticClass:
+                        "list-group-item d-flex align-items-center justify-content-between pointer",
+                      on: {
+                        click: function($event) {
+                          _vm.selectArtist(artist)
+                        }
+                      }
+                    },
+                    [
+                      _c("strong", [_vm._v(_vm._s(artist.stage_name))]),
+                      _vm._v(" "),
+                      _c("strong", [_vm._v(_vm._s(artist.real_name))])
+                    ]
+                  )
+                : _vm._e()
+            })
+          ],
+          2
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-68789ecb", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
