@@ -25,7 +25,11 @@
                         @forelse($tracks as $track)
                             <tr>
                                 <td>{{ $track->id }}</td>
-                                <td>{{ $track->artist->stage_name }}</td>
+                                <td>
+                                  <a href="{{route('artist.show', $track->artist_id)}}">
+                                    {{ $track->artist->stage_name }}
+                                  </a>
+                                </td>
                                 <td>{{ $track->title }}</td>
                                 <td> <a href="{{route('track.edit', $track->id)}}">Edit</a> </td>
                                 <td>{{ $track->genre->name }}</td>
@@ -44,6 +48,7 @@
                                 <td colspan="7">No tracks added yet</td>
                             </tr>
                         @endforelse
+                        
                         </tbody>
                     </table>
                 </div>
