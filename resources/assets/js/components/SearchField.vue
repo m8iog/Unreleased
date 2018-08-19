@@ -93,7 +93,7 @@
               window.location.href = '/artists/' + artist.id;
             },
             selectTrack(track) {
-              window.location.href = '/tracks/' + track.id;
+              window.location.href = '/artists/' + track.artist_id;
             },
             searchForGenres: _.debounce(function () {
                 this.loading = true;
