@@ -40,4 +40,6 @@ Route::group(["prefix" => "/api"], function () {
 
     Route::get('/genres', 'Api\GenreController@index')->name('api.genre.index');
     Route::post('/genres', 'Api\GenreController@store')->name('api.genre.store');
+
+    Route::get('/tracks', 'Api\TrackController@index')->name('api.track.index');
 });

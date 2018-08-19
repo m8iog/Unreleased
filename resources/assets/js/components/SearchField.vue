@@ -8,7 +8,7 @@
         <div class=" list-group-dropdown shadow-sm" ref="dropdown" v-show="isOpen">
             <ul class="list-group">
                 <li class="list-group-item">
-                    <input type="text" class="form-control" placeholder="Search for genres or artists" v-model="search">
+                    <input type="text" class="form-control" placeholder="Search for tracks, genres or artists" v-model="search">
                 </li>
                 <li class="list-group-item text-center" v-show="loading">
                     <i class="fas fa-fw fa-cog fa-spin"></i> Searching
@@ -27,6 +27,13 @@
                     @click="selectArtist(artist)" v-for="artist in artists" v-if="artists.length">
                     <strong>{{ artist.stage_name }}</strong>
                     <strong>{{ artist.real_name }}</strong>
+                </li>
+                <li class="list-group-item" v-if="tracks.length">
+                  <small>Tracks</small>
+                </li>
+                <li class="list-group-item d-flex align-items-center justify-content-between pointer"
+                    @click="selectTrack(track)" v-for="track in tracks" v-if="tracks.length">
+                    <strong>{{ track.title }}</strong>
                 </li>
             </ul>
         </div>
@@ -51,8 +58,10 @@
                 search: "",
                 resultGenre: null,
                 resultArtist: null,
+                resultTrack: null,
                 genres: [],
                 artists: [],
+                tracks: [],
             }
         },
         mounted() {
@@ -79,12 +88,29 @@
             },
             selectGenre(genre) {
                 window.location.href = '/genres/' + genre.id;
-
             },
             selectArtist(artist) {
               window.location.href = '/artists/' + artist.id;
-
             },
+            selectTrack(track) {
+              window.location.href = '/tracks/' + track.id;
+            },
+            searchForGenres: _.debounce(function () {
+                this.loading = true;
+                axios
+                    .get("/api/genres", {
+                        params: {
+                            q: this.search
+                        }
+                    })
+                    .then(response => {
+                        this.genres = response.data;
+                        this.loading = false;
+                        if(this.search === ""){
+                          this.genres= []
+                        }
+                    });
+            }, 250),
             searchForArtists: _.debounce(function () {
                 this.loading = true;
                 axios
@@ -101,27 +127,28 @@
                         }
                     });
             }, 250),
-            searchForGenres: _.debounce(function () {
+            searchForTracks: _.debounce(function () {
                 this.loading = true;
                 axios
-                    .get("/api/genres", {
+                    .get("/api/tracks", {
                         params: {
                             q: this.search
                         }
                     })
                     .then(response => {
-                        this.genres = response.data;
+                        this.tracks = response.data;
                         this.loading = false;
                         if(this.search === ""){
-                          this.genres= []
+                          this.tracks = []
                         }
                     });
-            }, 250)
+            }, 250),
         },
         watch: {
             search(newValue, oldValue) {
-              this.searchForArtists();
               this.searchForGenres();
+              this.searchForArtists();
+              this.searchForTracks();
             }
         },
     }

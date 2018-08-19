@@ -48516,6 +48516,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -48526,8 +48533,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             search: "",
             resultGenre: null,
             resultArtist: null,
+            resultTrack: null,
             genres: [],
-            artists: []
+            artists: [],
+            tracks: []
         };
     },
     mounted: function mounted() {
@@ -48559,25 +48568,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         selectArtist: function selectArtist(artist) {
             window.location.href = '/artists/' + artist.id;
         },
+        selectTrack: function selectTrack(track) {
+            window.location.href = '/tracks/' + track.id;
+        },
 
-        searchForArtists: _.debounce(function () {
-            var _this = this;
-
-            this.loading = true;
-            axios.get("/api/artists", {
-                params: {
-                    q: this.search
-                }
-            }).then(function (response) {
-                _this.artists = response.data;
-                _this.loading = false;
-                if (_this.search === "") {
-                    _this.artists = [];
-                }
-            });
-        }, 250),
         searchForGenres: _.debounce(function () {
-            var _this2 = this;
+            var _this = this;
 
             this.loading = true;
             axios.get("/api/genres", {
@@ -48585,18 +48581,51 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     q: this.search
                 }
             }).then(function (response) {
-                _this2.genres = response.data;
+                _this.genres = response.data;
+                _this.loading = false;
+                if (_this.search === "") {
+                    _this.genres = [];
+                }
+            });
+        }, 250),
+        searchForArtists: _.debounce(function () {
+            var _this2 = this;
+
+            this.loading = true;
+            axios.get("/api/artists", {
+                params: {
+                    q: this.search
+                }
+            }).then(function (response) {
+                _this2.artists = response.data;
                 _this2.loading = false;
                 if (_this2.search === "") {
-                    _this2.genres = [];
+                    _this2.artists = [];
+                }
+            });
+        }, 250),
+        searchForTracks: _.debounce(function () {
+            var _this3 = this;
+
+            this.loading = true;
+            axios.get("/api/tracks", {
+                params: {
+                    q: this.search
+                }
+            }).then(function (response) {
+                _this3.tracks = response.data;
+                _this3.loading = false;
+                if (_this3.search === "") {
+                    _this3.tracks = [];
                 }
             });
         }, 250)
     },
     watch: {
         search: function search(newValue, oldValue) {
-            this.searchForArtists();
             this.searchForGenres();
+            this.searchForArtists();
+            this.searchForTracks();
         }
     }
 });
@@ -48653,7 +48682,7 @@ var render = function() {
                 staticClass: "form-control",
                 attrs: {
                   type: "text",
-                  placeholder: "Search for genres or artists"
+                  placeholder: "Search for tracks, genres or artists"
                 },
                 domProps: { value: _vm.search },
                 on: {
@@ -48734,6 +48763,30 @@ var render = function() {
                       _vm._v(" "),
                       _c("strong", [_vm._v(_vm._s(artist.real_name))])
                     ]
+                  )
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm.tracks.length
+              ? _c("li", { staticClass: "list-group-item" }, [
+                  _c("small", [_vm._v("Tracks")])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm._l(_vm.tracks, function(track) {
+              return _vm.tracks.length
+                ? _c(
+                    "li",
+                    {
+                      staticClass:
+                        "list-group-item d-flex align-items-center justify-content-between pointer",
+                      on: {
+                        click: function($event) {
+                          _vm.selectTrack(track)
+                        }
+                      }
+                    },
+                    [_c("strong", [_vm._v(_vm._s(track.title))])]
                   )
                 : _vm._e()
             })
