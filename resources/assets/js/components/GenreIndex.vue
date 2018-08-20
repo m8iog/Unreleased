@@ -10,11 +10,16 @@
         <li class="list-group-item">
           <input type="text"  class="form-control"  v-model="search" placeholder="Filter genres on name"/>
         </li>
+        <li class="list-group-item text-center active" v-show="hiding_some">
+            <i class="fas fa-book"></i> {{hidden}} results are hidden. Filter names to find
+        </li>
 
         <li class="list-group-item d-flex align-items-center justify-content-between pointer"
         @click="selectGenre(genre)" v-for="genre in filteredGenres.slice(0, 15)">
         <strong>{{ genre.name }}</strong>
       </li>
+
+
 
     </ul>
   </div>
@@ -34,6 +39,8 @@ export default {
       search: "",
       resultGenre: null,
       genres: [],
+      hidden: 0,
+      hiding_some: false
 
     }
   },
@@ -61,13 +68,31 @@ export default {
       window.location.href = '/genres/' + genre.id;
     },
   },
+  watch: {
+      search(newValue, oldValue) {
+          if(this.filteredGenres.length > 15) {
+            this.hiding_some = true;
+            this.hidden = this.filteredGenres.length - 15;
+          } else {
+            this.hiding_some = false;
+          };
+      }
+  },
   computed: {
     filteredGenres: function() {
       return this.genres.filter((genre)=> {
         return genre.name.match(this.search);
       });
+
     },
 
-  }
+  },
+  updated: function() {
+    if(this.filteredGenres.length > 15) {
+      this.hiding_some = true;
+      this.hidden = this.filteredGenres.length - 15;
+    } else {
+      this.hiding_some = false;
+    };  }
 }
 </script>

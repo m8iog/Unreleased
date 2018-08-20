@@ -49195,6 +49195,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -49203,7 +49208,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       loading: false,
       search: "",
       resultGenre: null,
-      genres: []
+      genres: [],
+      hidden: 0,
+      hiding_some: false
 
     };
   },
@@ -49234,6 +49241,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       window.location.href = '/genres/' + genre.id;
     }
   },
+  watch: {
+    search: function search(newValue, oldValue) {
+      if (this.filteredGenres.length > 15) {
+        this.hiding_some = true;
+        this.hidden = this.filteredGenres.length - 15;
+      } else {
+        this.hiding_some = false;
+      };
+    }
+  },
   computed: {
     filteredGenres: function filteredGenres() {
       var _this2 = this;
@@ -49243,6 +49260,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     }
 
+  },
+  updated: function updated() {
+    if (this.filteredGenres.length > 15) {
+      this.hiding_some = true;
+      this.hidden = this.filteredGenres.length - 15;
+    } else {
+      this.hiding_some = false;
+    };
   }
 });
 
@@ -49315,6 +49340,29 @@ var render = function() {
                 }
               })
             ]),
+            _vm._v(" "),
+            _c(
+              "li",
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.hiding_some,
+                    expression: "hiding_some"
+                  }
+                ],
+                staticClass: "list-group-item text-center active"
+              },
+              [
+                _c("i", { staticClass: "fas fa-book" }),
+                _vm._v(
+                  " " +
+                    _vm._s(_vm.hidden) +
+                    " results are hidden. Filter names to find\n        "
+                )
+              ]
+            ),
             _vm._v(" "),
             _vm._l(_vm.filteredGenres.slice(0, 15), function(genre) {
               return _c(
