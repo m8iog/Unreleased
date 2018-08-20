@@ -15,7 +15,7 @@ class GenreController extends Controller
         $genres = Genre::query()
             ->when(request("q"), function ($query) {
                 $query->where("name", "like", request("q") . "%");
-            })
+            })->orderBy('name', 'asc')
             ->get();
 
         return GenreResource::collection($genres);

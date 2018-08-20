@@ -15,7 +15,7 @@ class TrackController extends Controller
         $tracks = Track::query()
             ->when(request("q"), function ($query) {
                 $query->where("title", "like", request("q") . "%");
-            })
+            })->orderBy('title', 'asc')
             ->get();
 
         return TrackResource::collection($tracks);
