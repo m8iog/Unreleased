@@ -15,7 +15,7 @@
         </li>
 
         <li class="list-group-item d-flex align-items-center justify-content-between pointer"
-        @click="selectGenre(genre)" v-for="genre in filteredGenres.slice(0, 15)">
+        @click="selectGenre(genre)" v-for="genre in filteredGenres.slice(0, maxShow)">
         <strong>{{ genre.name }}</strong>
       </li>
 
@@ -40,7 +40,8 @@ export default {
       resultGenre: null,
       genres: [],
       hidden: 0,
-      hiding_some: false
+      hiding_some: false,
+      maxShow: 15
 
     }
   },
@@ -67,15 +68,18 @@ export default {
     selectGenre(genre) {
       window.location.href = '/genres/' + genre.id;
     },
+    checkHidden(){
+      if(this.filteredGenres.length > this.maxShow) {
+        this.hiding_some = true;
+        this.hidden = this.filteredGenres.length - this.maxShow;
+      } else {
+        this.hiding_some = false;
+      };
+    }
   },
   watch: {
       search(newValue, oldValue) {
-          if(this.filteredGenres.length > 15) {
-            this.hiding_some = true;
-            this.hidden = this.filteredGenres.length - 15;
-          } else {
-            this.hiding_some = false;
-          };
+          this.checkHidden();
       }
   },
   computed: {
@@ -88,11 +92,7 @@ export default {
 
   },
   updated: function() {
-    if(this.filteredGenres.length > 15) {
-      this.hiding_some = true;
-      this.hidden = this.filteredGenres.length - 15;
-    } else {
-      this.hiding_some = false;
-    };  }
+    this.checkHidden();
+  }
 }
 </script>
