@@ -24,6 +24,7 @@ Route::post('/tracks/{id}/update', 'TrackController@update')->name('track.update
 Route::get('/tracks/{id}/edit', 'TrackController@edit')->name('track.edit');
 
 Route::get('/genres', 'GenreController@index')->name('genre.index');
+Route::get('/genres/{id}', 'GenreController@show')->name('genre.show');
 
 
 Route::get('/artists', 'ArtistController@index')->name('artist.index');

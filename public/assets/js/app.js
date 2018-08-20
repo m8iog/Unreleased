@@ -14298,7 +14298,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(15);
-module.exports = __webpack_require__(64);
+module.exports = __webpack_require__(69);
 
 
 /***/ }),
@@ -14333,7 +14333,7 @@ Vue.component('artist-selector', __webpack_require__(43));
 Vue.component('genre-selector', __webpack_require__(49));
 Vue.component('search-field', __webpack_require__(54));
 Vue.component('artist-index', __webpack_require__(59));
-Vue.component('genre-index', __webpack_require__(68));
+Vue.component('genre-index', __webpack_require__(64));
 
 var app = new Vue({
   el: '#app'
@@ -49073,27 +49073,18 @@ if (false) {
 
 /***/ }),
 /* 64 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 65 */,
-/* 66 */,
-/* 67 */,
-/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(69)
+  __webpack_require__(65)
 }
 var normalizeComponent = __webpack_require__(4)
 /* script */
-var __vue_script__ = __webpack_require__(71)
+var __vue_script__ = __webpack_require__(67)
 /* template */
-var __vue_template__ = __webpack_require__(72)
+var __vue_template__ = __webpack_require__(68)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -49132,13 +49123,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 69 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(70);
+var content = __webpack_require__(66);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -49158,7 +49149,7 @@ if(false) {
 }
 
 /***/ }),
-/* 70 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(false);
@@ -49172,7 +49163,7 @@ exports.push([module.i, "\n.list-group-dropdown {\n  z-index: 100;\n}\n", ""]);
 
 
 /***/ }),
-/* 71 */
+/* 67 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -49251,11 +49242,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return genre.name.match(_this2.search);
       });
     }
+
   }
 });
 
 /***/ }),
-/* 72 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -49324,7 +49316,7 @@ var render = function() {
               })
             ]),
             _vm._v(" "),
-            _vm._l(_vm.filteredGenres, function(genre) {
+            _vm._l(_vm.filteredGenres.slice(0, 15), function(genre) {
               return _c(
                 "li",
                 {
@@ -49355,6 +49347,12 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-1991d706", module.exports)
   }
 }
+
+/***/ }),
+/* 69 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
