@@ -49210,7 +49210,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       resultGenre: null,
       genres: [],
       hidden: 0,
-      hiding_some: false
+      hiding_some: false,
+      maxShow: 15
 
     };
   },
@@ -49239,16 +49240,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     selectGenre: function selectGenre(genre) {
       window.location.href = '/genres/' + genre.id;
+    },
+    checkHidden: function checkHidden() {
+      if (this.filteredGenres.length > this.maxShow) {
+        this.hiding_some = true;
+        this.hidden = this.filteredGenres.length - this.maxShow;
+      } else {
+        this.hiding_some = false;
+      };
     }
   },
   watch: {
     search: function search(newValue, oldValue) {
-      if (this.filteredGenres.length > 15) {
-        this.hiding_some = true;
-        this.hidden = this.filteredGenres.length - 15;
-      } else {
-        this.hiding_some = false;
-      };
+      this.checkHidden();
     }
   },
   computed: {
@@ -49262,12 +49266,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   },
   updated: function updated() {
-    if (this.filteredGenres.length > 15) {
-      this.hiding_some = true;
-      this.hidden = this.filteredGenres.length - 15;
-    } else {
-      this.hiding_some = false;
-    };
+    this.checkHidden();
   }
 });
 
@@ -49364,7 +49363,7 @@ var render = function() {
               ]
             ),
             _vm._v(" "),
-            _vm._l(_vm.filteredGenres.slice(0, 15), function(genre) {
+            _vm._l(_vm.filteredGenres.slice(0, _vm.maxShow), function(genre) {
               return _c(
                 "li",
                 {

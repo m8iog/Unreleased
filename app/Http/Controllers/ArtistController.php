@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Artist;
 use App\Repositories\ArtistRepository;
 use Illuminate\Http\Request;
+use Discogs;
+use Jolita\DiscogsApi\SearchParameters;
+
 
 class ArtistController extends Controller
 {
     public function index()
     {
-
         return view("artists.index");
     }
 
@@ -40,10 +42,16 @@ class ArtistController extends Controller
         'real_name' => 'required',
       ]);
 
+      $stage_name = $request->input('stage_name');
+      $searchParameters = new SearchParameters();
+      $searchParameters->settype('artist');
+      $discogsResult = Discogs::search($stage_name, $searchParameters);
+      $result = Discogs::artist($discogsResult->results[0]->id);
+
       Artist::create([
           "stage_name" => $request->input("stage_name"),
           "real_name" => $request->input("real_name"),
-          "bio" => $request->input("bio"),
+          "bio" => $result->profile,
       ]);
 
 
