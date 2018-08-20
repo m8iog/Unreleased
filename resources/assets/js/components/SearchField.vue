@@ -1,14 +1,14 @@
 <template>
     <div class="search-field">
 
-        <button type="button" ref="input" class="btn btn-block text-left" @mouseover="toggleSearch">
+        <button type="button" ref="input" class="btn btn-block text-left" @mouseover="toggleSearch" @click="toggleSearch">
             Search
         </button>
 
-        <div class=" list-group-dropdown shadow-sm" ref="dropdown" v-show="isOpen">
+        <div class=" list-group-dropdown shadow-sm" ref="dropdown" v-show="isOpen" @mouseleave="closeSearchIfEmpty">
             <ul class="list-group">
                 <li class="list-group-item">
-                    <input type="text" class="form-control" placeholder="Search for tracks, genres or artists" v-model="search">
+                    <input type="text" class="form-control" placeholder="Search for tracks, genres or artists" autofocus="autofocus" v-model="search">
                 </li>
                 <li class="list-group-item text-center" v-show="loading">
                     <i class="fas fa-fw fa-cog fa-spin"></i> Searching
@@ -79,12 +79,12 @@
         methods: {
             toggleSearch() {
                 this.isOpen = !this.isOpen;
+                this.search = "";
             },
-            openSearch() {
-                this.isOpen = true;
-            },
-            closeSearch() {
-                this.isOpen = false;
+            closeSearchIfEmpty() {
+                if(this.search === ""){
+                  this.isOpen = false;
+                }
             },
             selectGenre(genre) {
                 window.location.href = '/genres/' + genre.id;
