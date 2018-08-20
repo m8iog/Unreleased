@@ -40,10 +40,6 @@
     </div>
 </template>
 <style>
-    .genre-selector {
-        position: relative;
-    }
-
     .list-group-dropdown {
         z-index: 100;
     }
