@@ -28,9 +28,7 @@
                     </a>
                 </li>
                 <li class="nav-item mr-2">
-                    <a class="nav-link" href="{{ route('genre.index') }}">
-                        <i class="fas fa-fw fa-music"></i> {{ __('Genres') }}
-                    </a>
+                    <genre-index></genre-index>
                 </li>
                 @guest
                     <li class="nav-item ml-4 border-left pl-4 border-white">
