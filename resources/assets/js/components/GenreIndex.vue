@@ -10,9 +10,9 @@
         <li class="list-group-item">
           <input type="text"  class="form-control"  v-model="search" placeholder="Filter genres on name"/>
         </li>
-        
+
         <li class="list-group-item d-flex align-items-center justify-content-between pointer"
-        @click="selectGenre(genre)" v-for="genre in filteredGenres">
+        @click="selectGenre(genre)" v-for="genre in filteredGenres.slice(0, 15)">
         <strong>{{ genre.name }}</strong>
       </li>
 
@@ -66,7 +66,8 @@ export default {
       return this.genres.filter((genre)=> {
         return genre.name.match(this.search);
       });
-    }
+    },
+
   }
 }
 </script>
