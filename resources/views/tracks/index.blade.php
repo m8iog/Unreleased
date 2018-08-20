@@ -32,7 +32,10 @@
                                 </td>
                                 <td>{{ $track->title }}</td>
                                 <td> <a href="{{route('track.edit', $track->id)}}">Edit</a> </td>
-                                <td>{{ $track->genre->name }}</td>
+                                <td>
+                                  <a href="{{route('genre.show', $track->genre_id)}}">
+                                    {{ $track->genre->name }}</td>
+                                  </a>
                                 <td>{{ $track->created_at->diffForHumans() }}</td>
                                 <td>
                                     <a href="{{ $track->source_url }}" rel="nofollow" target="_blank">
@@ -48,7 +51,7 @@
                                 <td colspan="7">No tracks added yet</td>
                             </tr>
                         @endforelse
-                        
+
                         </tbody>
                     </table>
                 </div>
