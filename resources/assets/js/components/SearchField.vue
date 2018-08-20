@@ -1,7 +1,7 @@
 <template>
     <div class="search-field">
 
-        <button type="button" ref="input" class="btn btn-block text-left" @click="toggleSearch">
+        <button type="button" ref="input" class="btn btn-block text-left" @mouseover="toggleSearch">
             Search
         </button>
 
