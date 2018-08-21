@@ -7,6 +7,8 @@ use App\Repositories\ArtistRepository;
 use Illuminate\Http\Request;
 use Discogs;
 use Jolita\DiscogsApi\SearchParameters;
+use App\Events\ArtistCreated;
+
 
 
 class ArtistController extends Controller
@@ -41,19 +43,20 @@ class ArtistController extends Controller
         'stage_name' => 'required|unique:artists',
         'real_name' => 'required',
       ]);
-
+      /*
       $stage_name = $request->input('stage_name');
       $searchParameters = new SearchParameters();
       $searchParameters->settype('artist');
       $discogsResult = Discogs::search($stage_name, $searchParameters);
       $result = Discogs::artist($discogsResult->results[0]->id);
-
-      Artist::create([
+      */
+      $artist = Artist::create([
           "stage_name" => $request->input("stage_name"),
           "real_name" => $request->input("real_name"),
-          "bio" => $result->profile,
+          "bio" => $request->input("bio"),
       ]);
 
+      event(new ArtistCreated($artist));
 
       session()->flash('success', 'Your artist has been added successfully.');
       return redirect()->route("artist.index");

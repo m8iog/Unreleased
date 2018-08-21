@@ -6,6 +6,8 @@ use App\Events\ArtistCreated;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Artist;
+use Jolita\DiscogsApi\SearchParameters;
+use Discogs;
 
 class SyncArtistDetailsFromExternalSources implements ShouldQueue
 {
@@ -38,8 +40,15 @@ class SyncArtistDetailsFromExternalSources implements ShouldQueue
         $discogsResult = Discogs::search($stage_name, $searchParameters);
         $result = Discogs::artist($discogsResult->results[0]->id);
         $artist = Artist::findOrFail($event->artist->id);
-        $artist->bio = $result->profile;
+        if ($result->profile === "") {
+        } else {
+        $bio = $result->profile;
+        $bio = str_replace('[b]', '', $bio);
+        $bio = str_replace('[/b]', '', $bio);
+        $bio = str_replace('[i]', '', $bio);
+        $bio = str_replace('[/i]', '', $bio);
+        $artist->bio = $bio;
+        }
         $artist->save();
-
     }
 }
