@@ -45,11 +45,17 @@ class SyncArtistDetailsFromExternalSources implements ShouldQueue
         $bio = $result->profile;
         $bio = str_replace('[b]', '', $bio);
         $bio = str_replace('[/b]', '', $bio);
+        $bio = str_replace('[u]', '', $bio);
+        $bio = str_replace('[/u]', '', $bio);
         $bio = str_replace('[i]', '', $bio);
         $bio = str_replace('[/i]', '', $bio);
         $artist->bio = $bio;
-        $artist->discogs_id = $result->id;
+        $artist->disgocs_id = $result->id;
         }
         $artist->save();
+    }
+
+    public function removeTags($text){
+
     }
 }

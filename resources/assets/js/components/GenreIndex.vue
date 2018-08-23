@@ -1,7 +1,7 @@
 <template>
   <div class="genre-index">
 
-    <a class="nav-link"  ref="input" v-on:click.prevent @click="toggleView" @mouseover="toggleView">
+    <a class="nav-link pointer"  ref="input" v-on:click.prevent @click="toggleView">
       <i class="fas fa-fw fa-music"></i> Genres
     </a>
 
@@ -11,7 +11,7 @@
           <input type="text"  class="form-control"  v-model="search" placeholder="Filter genres on name"/>
         </li>
         <li class="list-group-item text-center active" v-show="hiding_some">
-            <i class="fas fa-book"></i> {{hidden}} results are hidden. Filter names to find
+            <i class="fas fa-book"></i> {{hidden}} genres are hidden. Filter names to find
         </li>
 
         <li class="list-group-item d-flex align-items-center justify-content-between pointer"

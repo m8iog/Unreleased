@@ -16,12 +16,12 @@
     </div>
     <div class="card-body" v-for="artist in filteredArtists" >
 
-      <div class="media" @click="clickedArtist(artist)">
+      <div class="media pointer" @click="clickedArtist(artist)">
         <img src="http://via.placeholder.com/80x80" alt="Generic placeholder image" class="mr-3">
         <div class="media-body">
 
           <h5 class="mt-0">{{ artist.stage_name}}</h5>
-          <strong>Bio:</strong> {{ artist.bio }}
+          <strong>Bio:</strong> {{ getBio(artist) }}
         </div>
       </div>
     </div>
@@ -49,6 +49,15 @@ export default {
     createArtist() {
       window.location.href = '/artists/create';
     },
+    getBio (artist) {
+        if(artist.bio){
+            let bio = artist.bio;
+            return bio.length > 200 ? bio.substring(0, 200) + '...' : bio;
+          } else {
+            return 'No bio'
+          }
+        },
+
   },
   computed: {
     filteredArtists: function() {

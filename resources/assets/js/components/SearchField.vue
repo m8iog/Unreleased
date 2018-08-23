@@ -1,9 +1,9 @@
 <template>
     <div class="search-field">
 
-        <button type="button" ref="input" class="btn btn-block text-left" @mouseover="toggleSearch" @click="toggleSearch">
-            Search
-        </button>
+        <a class="nav-link pointer"  ref="input" v-on:click.prevent @click="toggleSearch">
+          <i class="fas fa-fw fa-search"></i> Search
+        </a>
 
         <div class=" list-group-dropdown shadow-sm" ref="dropdown" v-show="isOpen" @mouseleave="closeSearchIfEmpty">
             <ul class="list-group">

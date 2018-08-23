@@ -48629,14 +48629,20 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "search-field" }, [
     _c(
-      "button",
+      "a",
       {
         ref: "input",
-        staticClass: "btn btn-block text-left",
-        attrs: { type: "button" },
-        on: { mouseover: _vm.toggleSearch, click: _vm.toggleSearch }
+        staticClass: "nav-link pointer",
+        on: {
+          click: [
+            function($event) {
+              $event.preventDefault()
+            },
+            _vm.toggleSearch
+          ]
+        }
       },
-      [_vm._v("\n        Search\n    ")]
+      [_c("i", { staticClass: "fas fa-fw fa-search" }), _vm._v(" Search\n    ")]
     ),
     _vm._v(" "),
     _c(
@@ -48884,7 +48890,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -48949,6 +48955,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     createArtist: function createArtist() {
       window.location.href = '/artists/create';
+    },
+    getBio: function getBio(artist) {
+      if (artist.bio) {
+        var bio = artist.bio;
+        return bio.length > 200 ? bio.substring(0, 200) + '...' : bio;
+      } else {
+        return 'No bio';
+      }
     }
   },
   computed: {
@@ -49020,7 +49034,7 @@ var render = function() {
           _c(
             "div",
             {
-              staticClass: "media",
+              staticClass: "media pointer",
               on: {
                 click: function($event) {
                   _vm.clickedArtist(artist)
@@ -49042,7 +49056,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("strong", [_vm._v("Bio:")]),
-                _vm._v(" " + _vm._s(artist.bio) + "\n      ")
+                _vm._v(" " + _vm._s(_vm.getBio(artist)) + "\n      ")
               ])
             ]
           )
@@ -49283,15 +49297,14 @@ var render = function() {
       "a",
       {
         ref: "input",
-        staticClass: "nav-link",
+        staticClass: "nav-link pointer",
         on: {
           click: [
             function($event) {
               $event.preventDefault()
             },
             _vm.toggleView
-          ],
-          mouseover: _vm.toggleView
+          ]
         }
       },
       [_c("i", { staticClass: "fas fa-fw fa-music" }), _vm._v(" Genres\n    ")]
@@ -49358,7 +49371,7 @@ var render = function() {
                 _vm._v(
                   " " +
                     _vm._s(_vm.hidden) +
-                    " results are hidden. Filter names to find\n        "
+                    " genres are hidden. Filter names to find\n        "
                 )
               ]
             ),

@@ -13,7 +13,7 @@
 
               <div class="col-md-4">
                 <div class="form-group{{ $errors->has('artist_id') ? ' has-error' : '' }}">
-                  {!! Form::label('artist_id', 'Input label') !!}
+                  {!! Form::label('artist_id', 'Artist') !!}
                   <artist-selector></artist-selector>
                   <small class="text-danger">{{ $errors->first('artist_id') }}</small>
                 </div>

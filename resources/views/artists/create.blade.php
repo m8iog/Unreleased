@@ -40,7 +40,7 @@
 
 
             <div class="btn-group pull-right">
-              {!! Form::submit("Add track", ['class' => 'btn btn-success']) !!}
+              {!! Form::submit("Create artist", ['class' => 'btn btn-success']) !!}
             </div>
             {!! Form::close() !!}
 
