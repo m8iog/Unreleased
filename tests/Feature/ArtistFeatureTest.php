@@ -37,6 +37,7 @@ class ArtistFeatureTest extends TestCase
   {
     $artist = factory(Artist::class)->make();
     $user = factory(User::class)->create();
+    $this->withoutEvents();
 
     $this->withoutExceptionHandling()
     ->actingAs($user)
@@ -53,5 +54,30 @@ class ArtistFeatureTest extends TestCase
       'real_name' => $artist->real_name,
       'bio' => $artist->bio
     ]);
+  }
+
+  public function test_can_edit_an_artist() {
+    $artist = factory(Artist::class)->create();
+    $user = factory(User::class)->create();
+
+    $this->withoutExceptionHandling()
+    ->actingAs($user)
+    ->post(route("artist.update", $artist->id), [
+      'real_name' => 'Anne Stine',
+      'bio' => "Yes, I do exist"
+    ])
+    ->assertStatus(302)
+    ->assertRedirect('/artists/1')
+    ->assertSessionHas('success', $artist->stage_name.' has been updated successfully.');
+    $this->assertDatabaseHas('artists', [
+      'stage_name' => $artist->stage_name,
+      'real_name' => 'Anne Stine',
+      'bio' => "Yes, I do exist"
+    ])
+    ->assertDatabaseMissing('artists', [
+      'real_name' => $artist->real_name,
+      'bio' => $artist->bio
+    ]);
+
   }
 }

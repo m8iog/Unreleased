@@ -2,7 +2,8 @@
 
 @section('content')
     <div class="container">
-      <h1 class="text-center">{{$artist->stage_name}}</h1>
+      <h1 class="text-center">{{$artist->stage_name}}<a href="{{route('artist.edit', $artist->id)}}" class="btn btn-info float-right">Edit</a></h1>
+
         <div class="row">
           <div class="col-md-4">
             <div class="card">
