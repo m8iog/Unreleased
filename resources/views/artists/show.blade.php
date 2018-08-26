@@ -24,9 +24,23 @@
                 {{$artist->bio}}
               </div>
             </div>
+
+
           </div>
         </div>
-        <br><br>
+        <br>
+        @if ($artist->discogs_bio)
+          <div class="card">
+            <div class="card-header bg-dark text-white">
+              Bio from Discogs
+            </div>
+            <div class="card-body">
+              {{$artist->discogs_bio}}
+            </div>
+          </div>
+        @endif
+        <br>
+
         <div class="row">
 
             <div class="col-md-12">

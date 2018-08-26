@@ -44,6 +44,7 @@ class ArtistApiFeatureTest extends TestCase
     /** @test */
     public function can_create_artist_with_stage_name_from_api()
     {
+      $this->withoutEvents();
 
         $this->json("post", "/api/artists", [
             "stage_name" => "Headhunterz"
@@ -61,6 +62,8 @@ class ArtistApiFeatureTest extends TestCase
     /** @test */
     public function stage_name_must_be_unique() // At least for now
     {
+      $this->withoutEvents();
+
         factory(Artist::class)->create(["stage_name" => "Headhunterz"]);
 
         $this->json("post", "/api/artists", [
