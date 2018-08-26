@@ -16,6 +16,7 @@ class ArtistController extends Controller
         $artists = Artist::query()
             ->when(request("q"), function ($query) {
                 $query->where("stage_name", "like", request("q") . "%");
+                $query->orWhere("real_name", "like", request("q") . "%");
             })->orderBy('stage_name', 'asc')
             ->get();
 
