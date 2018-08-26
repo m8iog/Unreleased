@@ -20,7 +20,7 @@
         <img src="http://via.placeholder.com/80x80" alt="Generic placeholder image" class="mr-3">
         <div class="media-body">
 
-          <h5 class="mt-0">{{ artist.stage_name}}</h5>
+          <h5 class="mt-0">{{ artist.stage_name}} - <small>{{artist.real_name}}</small> </h5>
           <strong>Bio:</strong> {{ getBio(artist) }}
         </div>
       </div>
@@ -62,7 +62,7 @@ export default {
   computed: {
     filteredArtists: function() {
       return this.artists.filter((artist)=> {
-        return artist.stage_name.match(this.search);
+        return (artist.stage_name.toLowerCase().match(this.search.toLowerCase()) || artist.real_name.toLowerCase().match(this.search.toLowerCase()));
       });
     }
   }

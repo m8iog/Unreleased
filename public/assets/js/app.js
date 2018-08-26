@@ -48758,7 +48758,7 @@ var render = function() {
                     [
                       _c("strong", [_vm._v(_vm._s(artist.stage_name))]),
                       _vm._v(" "),
-                      _c("strong", [_vm._v(_vm._s(artist.real_name))])
+                      _c("small", [_vm._v(_vm._s(artist.real_name))])
                     ]
                   )
                 : _vm._e()
@@ -48970,7 +48970,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this2 = this;
 
       return this.artists.filter(function (artist) {
-        return artist.stage_name.match(_this2.search);
+        return artist.stage_name.toLowerCase().match(_this2.search.toLowerCase()) || artist.real_name.toLowerCase().match(_this2.search.toLowerCase());
       });
     }
   }
@@ -49052,7 +49052,8 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "media-body" }, [
                 _c("h5", { staticClass: "mt-0" }, [
-                  _vm._v(_vm._s(artist.stage_name))
+                  _vm._v(_vm._s(artist.stage_name) + " - "),
+                  _c("small", [_vm._v(_vm._s(artist.real_name))])
                 ]),
                 _vm._v(" "),
                 _c("strong", [_vm._v("Bio:")]),
@@ -49274,7 +49275,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this2 = this;
 
       return this.genres.filter(function (genre) {
-        return genre.name.match(_this2.search);
+        return genre.name.toLowerCase().match(_this2.search.toLowerCase());
       });
     }
 

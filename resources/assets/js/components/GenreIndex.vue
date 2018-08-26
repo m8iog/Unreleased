@@ -85,7 +85,7 @@ export default {
   computed: {
     filteredGenres: function() {
       return this.genres.filter((genre)=> {
-        return genre.name.match(this.search);
+        return genre.name.toLowerCase().match(this.search.toLowerCase());
       });
 
     },

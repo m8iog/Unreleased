@@ -26,7 +26,7 @@
                 <li class="list-group-item d-flex align-items-center justify-content-between pointer"
                     @click="selectArtist(artist)" v-for="artist in artists" v-if="artists.length">
                     <strong>{{ artist.stage_name }}</strong>
-                    <strong>{{ artist.real_name }}</strong>
+                    <small>{{ artist.real_name }}</small>
                 </li>
                 <li class="list-group-item" v-if="tracks.length">
                   <small>Tracks</small>
