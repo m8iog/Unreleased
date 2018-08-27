@@ -24,6 +24,7 @@ Vue.component('search-field', require('./components/SearchField'));
 Vue.component('artist-index', require('./components/ArtistIndex'));
 Vue.component('genre-index', require('./components/GenreIndex'));
 
+
 const app = new Vue({
     el: '#app'
 });

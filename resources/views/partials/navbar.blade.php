@@ -3,7 +3,7 @@
         <a class="navbar-brand font-weight-bold" href="{{ route("track.index") }}">
             Un:Released.io
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -30,8 +30,10 @@
                 <li class="nav-item mr-2">
                     <genre-index></genre-index>
                 </li>
+                <li class="border-left pl-4 border-white 	.d-none .d-sm-block">
+                <li/>
                 @guest
-                    <li class="nav-item ml-4 border-left pl-4 border-white">
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                     </li>
                     <li class="nav-item">
@@ -39,7 +41,9 @@
                     </li>
                 @else
 
-                    <li class="nav-item dropdown ml-4 border-left pl-4 border-white">
+
+                    <li class="nav-item dropdown ml-4">
+
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
